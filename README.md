@@ -1,6 +1,6 @@
 # Knowledge Graph Program
 
-The program is prebuilt. To run the program it is only necessary to run the jar file, as explained in the Usage part.read
+The program is prebuilt. To run the program it is only necessary to run the jar file, as explained in the Usage part
 
 ## Build
 
