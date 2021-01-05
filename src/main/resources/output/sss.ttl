@@ -1,0 +1,206 @@
+@prefix :      <http://semantics.id/ns/example/movie#> .
+@prefix obda:  <https://w3id.org/obda/vocabulary#> .
+@prefix ex:    <http://semantics.id/ns/example#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix xml:   <http://www.w3.org/XML/1998/namespace> .
+@prefix www:   <http://www.movieontology.org/2009/11/09/> .
+@prefix owl2xml: <http://www.w3.org/2006/12/owl2-xml#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dc:    <http://purl.org/dc/elements/1.1/> .
+
+<http://xmlns.com/foaf/0.1/knows>
+        a            owl:ObjectProperty ;
+        rdfs:domain  <http://xmlns.com/foaf/0.1/Person> ;
+        rdfs:range   <http://xmlns.com/foaf/0.1/Person> .
+
+:genre_action  a    :Genre , owl:NamedIndividual ;
+        rdfs:label  "Action" .
+
+ex:julius_avery  a  :Writer , :MovieDirector , owl:NamedIndividual ;
+        :hasGender  "male" ;
+        :hasName    "Julius Avery" .
+
+ex:movie_2  a              :Movie , owl:NamedIndividual ;
+        rdfs:label         "Son of a Gun" ;
+        :hasActor          ex:ewan_mcgregor , ex:alicia_vikander ;
+        :hasFilmStudio     ex:EntertainmentOne ;
+        :hasGenre          :genre_drama , :genre_action ;
+        :hasMovieDirector  ex:julius_avery ;
+        :hasReleaseDate    "2014-01-01"^^xsd:date ;
+        :hasWriter         ex:writer_3 , ex:julius_avery .
+
+ex:EntertainmentOne  a       :FilmStudio , owl:NamedIndividual ;
+        rdfs:label           "Entertainment One" ;
+        :hasEstablishedDate  "1973-01-01" .
+
+:hasCrew  a          owl:ObjectProperty ;
+        rdfs:domain  :Movie ;
+        rdfs:range   <http://xmlns.com/foaf/0.1/Person> .
+
+:genre_romance  a   :Genre , owl:NamedIndividual ;
+        rdfs:label  "Romance" .
+
+ex:writer_5  a    :Writer , owl:NamedIndividual ;
+        :hasName  "Evan Spiliotopoulos" .
+
+:Movie  a       owl:Class .
+
+ex:WaltDisneyPictures
+        a                    :FilmStudio , owl:NamedIndividual ;
+        rdfs:label           "Walt Disney Pictures" ;
+        :hasEstablishedDate  "1985-06-21" .
+
+ex:movie_1  a              :Movie , owl:NamedIndividual ;
+        rdfs:label         "Christopher Robin" ;
+        :hasActor          ex:hayley_atwell , ex:ewan_mcgregor ;
+        :hasFilmStudio     ex:WaltDisneyPictures ;
+        :hasGenre          :genre_family , :genre_animation ;
+        :hasMovieDirector  ex:marc_forster ;
+        :hasReleaseDate    "2018-01-01"^^xsd:date ;
+        :hasWriter         ex:writer_2 , ex:writer_1 .
+
+:hasGender  a        owl:FunctionalProperty , owl:DatatypeProperty ;
+        rdfs:domain  <http://xmlns.com/foaf/0.1/Person> .
+
+:genre_drama  a     :Genre , owl:NamedIndividual ;
+        rdfs:label  "Drama" .
+
+ex:bill_condon  a   :MovieDirector , owl:NamedIndividual ;
+        :hasGender  "male" ;
+        :hasName    "Bill Condon" .
+
+:genre_family  a    :Genre , owl:NamedIndividual ;
+        rdfs:label  "Family" .
+
+:hasDateOfBirth  a   owl:FunctionalProperty , owl:DatatypeProperty ;
+        rdfs:domain  <http://xmlns.com/foaf/0.1/Person> .
+
+:Writer  a               owl:Class ;
+        rdfs:subClassOf  <http://xmlns.com/foaf/0.1/Person> .
+
+:hasName  a          owl:DatatypeProperty ;
+        rdfs:domain  <http://xmlns.com/foaf/0.1/Person> ;
+        rdfs:range   xsd:string .
+
+ex:writer_4  a      :Writer , owl:NamedIndividual ;
+        :hasGender  "male" ;
+        :hasName    "Stephen Chbosky" .
+
+:hasActor  a                owl:ObjectProperty ;
+        rdfs:domain         :Movie ;
+        rdfs:range          :Actor ;
+        owl:minCardinality  1 .
+
+ex:dan_stevens  a        :Actor , owl:NamedIndividual ;
+        :hasDateOfBirth  "1982-10-10" ;
+        :hasGender       "male" ;
+        :hasName         "Dan Stevens" .
+
+:Actor  a                owl:Class ;
+        rdfs:subClassOf  <http://xmlns.com/foaf/0.1/Person> .
+
+:hasReleaseDate  a   owl:DatatypeProperty ;
+        rdfs:domain  :Movie ;
+        rdfs:range   xsd:date .
+
+ex:emma_watson  a        :Actor , owl:NamedIndividual ;
+        :hasDateOfBirth  "1990-04-15" ;
+        :hasGender       "female" ;
+        :hasName         "Emma Watson" .
+
+ex:marc_forster  a  :MovieDirector , owl:NamedIndividual ;
+        :hasGender  "male" ;
+        :hasName    "Marc Forster" .
+
+:FilmStudio  a  owl:Class .
+
+xsd:date  a     rdfs:Datatype .
+
+:hasGenre  a                owl:ObjectProperty ;
+        rdfs:domain         :Movie ;
+        rdfs:range          :Genre ;
+        owl:minCardinality  1 .
+
+ex:writer_3  a      :Writer , owl:NamedIndividual ;
+        :hasGender  "male" ;
+        :hasName    "John Collee" .
+
+:Genre  a       owl:Class .
+
+:hasWriter  a               owl:ObjectProperty ;
+        rdfs:domain         :Movie ;
+        rdfs:range          :Writer ;
+        rdfs:subPropertyOf  :hasCrew ;
+        owl:minCardinality  1 .
+
+:friendOf  a                owl:SymmetricProperty , owl:ObjectProperty ;
+        rdfs:domain         <http://xmlns.com/foaf/0.1/Person> ;
+        rdfs:range          <http://xmlns.com/foaf/0.1/Person> ;
+        rdfs:subPropertyOf  <http://xmlns.com/foaf/0.1/knows> .
+
+owl:minCardinality  a  owl:AnnotationProperty .
+
+ex:MandevilleFilms  a        :FilmStudio , owl:NamedIndividual ;
+        rdfs:label           "Mandeville Films" ;
+        :hasEstablishedDate  "1955-01-01" .
+
+<http://semantics.id/ns/example/movie>
+        a               owl:Ontology ;
+        rdfs:comment    "An ontology about movie and related concepts." ;
+        owl:versionIRI  <http://semantics.id/ns/example/movie/1.0.1> .
+
+:hasMovieDirector  a        owl:ObjectProperty ;
+        rdfs:domain         :Movie ;
+        rdfs:range          :MovieDirector ;
+        rdfs:subPropertyOf  :hasCrew ;
+        owl:minCardinality  1 .
+
+:hasFilmStudio  a           owl:ObjectProperty ;
+        rdfs:domain         :Movie ;
+        rdfs:range          :FilmStudio ;
+        owl:minCardinality  1 .
+
+ex:writer_2  a    :Writer , owl:NamedIndividual ;
+        :hasName  "Alex Ross" .
+
+:genre_animation  a  :Genre , owl:NamedIndividual ;
+        rdfs:label  "Animation" .
+
+:MovieDirector  a        owl:Class ;
+        rdfs:subClassOf  <http://xmlns.com/foaf/0.1/Person> .
+
+ex:alicia_vikander  a  :Actor , owl:NamedIndividual ;
+        :hasGender  "female" ;
+        :hasName    "Alicia Vikander" .
+
+<http://xmlns.com/foaf/0.1/Person>
+        a       owl:Class .
+
+ex:ewan_mcgregor  a      :Actor , owl:NamedIndividual ;
+        :hasDateOfBirth  "1971-03-31" ;
+        :hasGender       "male" ;
+        :hasName         "Ewan McGregor" .
+
+ex:movie_3  a              owl:NamedIndividual , :Movie ;
+        rdfs:label         "Beauty and the Beast"@en ;
+        :hasActor          ex:dan_stevens , ex:emma_watson , ex:ewan_mcgregor ;
+        :hasFilmStudio     ex:WaltDisneyPictures ;
+        :hasGenre          :genre_family , :genre_romance , :genre_animation ;
+        :hasMovieDirector  ex:bill_condon ;
+        :hasReleaseDate    "2017-01-01"^^xsd:date ;
+        :hasWriter         ex:writer_4 , ex:writer_5 .
+
+ex:writer_1  a           :Writer , owl:NamedIndividual ;
+        :hasDateOfBirth  "1966-06-07" ;
+        :hasGender       "male" ;
+        :hasName         "Tom McCarthy" .
+
+ex:hayley_atwell  a      :Actor , owl:NamedIndividual ;
+        :hasDateOfBirth  "1982-04-05" ;
+        :hasGender       "female" ;
+        :hasName         "Hayley Atwell" .
+
+:hasEstablishedDate  a  owl:FunctionalProperty , owl:DatatypeProperty ;
+        rdfs:domain  :FilmStudio .
